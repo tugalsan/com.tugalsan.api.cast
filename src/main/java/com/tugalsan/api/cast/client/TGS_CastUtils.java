@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.*;
 import com.tugalsan.api.pack.client.*;
 import com.tugalsan.api.string.client.*;
+import com.tugalsan.api.unsafe.client.*;
 
 public class TGS_CastUtils {
 
@@ -60,21 +61,17 @@ public class TGS_CastUtils {
     }
 
     public static boolean isInteger(CharSequence text) {
-        try {
+        return TGS_UnSafe.compile(() -> {
             Integer.parseInt(text.toString());
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
+            return true;
+        }, e -> false);
     }
 
     public static boolean isDouble(CharSequence text) {
-        try {
+        return TGS_UnSafe.compile(() -> {
             Double.parseDouble(text.toString());
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
+            return true;
+        }, e -> false);
     }
 
     public static String toString(List<String> data, CharSequence delimiter) {
@@ -107,11 +104,7 @@ public class TGS_CastUtils {
     }
 
     public static Integer toInteger(CharSequence s) {
-        try {
-            return Integer.parseInt(s.toString().trim());
-        } catch (Exception e) {
-            return null;
-        }
+        return TGS_UnSafe.compile(() -> Integer.parseInt(s.toString().trim()), e -> null);
     }
 
     public static Long toLong(CharSequence s, Long defValue) {
@@ -120,25 +113,16 @@ public class TGS_CastUtils {
     }
 
     public static Long toLong(CharSequence s) {
-        try {
-            return Long.parseLong(s.toString().trim());
-        } catch (Exception e) {
-            return null;
-        }
+        return TGS_UnSafe.compile(() -> Long.parseLong(s.toString().trim()), e -> null);
     }
 
     public static Long toLong(Object o) {
-        return o == null ? null : TGS_CastUtils.toLong(o.toString());
+        return TGS_UnSafe.compile(() -> Long.parseLong(o.toString().trim()), e -> null);
     }
 
     @Deprecated
     public static Float toFloat(CharSequence s) {//ERROR PRONE
-        try {
-            var sFixedTR = s.toString().trim().replace(",", ".");
-            return Float.parseFloat(sFixedTR);
-        } catch (Exception e) {
-            return null;
-        }
+        return TGS_UnSafe.compile(() -> Float.parseFloat(s.toString().trim().replace(",", ".")), e -> null);
     }
 
     public static Double toDouble(CharSequence s, Double defValue) {
@@ -147,11 +131,7 @@ public class TGS_CastUtils {
     }
 
     public static Double toDouble(CharSequence s) {
-        try {
-            return Double.parseDouble(s.toString().replace(",", ".").trim());
-        } catch (Exception e) {
-            return null;
-        }
+        return TGS_UnSafe.compile(() -> Double.parseDouble(s.toString().trim().replace(",", ".")), e -> null);
     }
 
     public static Boolean toBoolean(CharSequence bool, Boolean defValue) {
@@ -160,7 +140,7 @@ public class TGS_CastUtils {
     }
 
     public static Boolean toBoolean(CharSequence bool) {
-//      return Boolean.parseBoolean(bool.toString().trim());//WRING FALSE VALUES!!!
+//      return Boolean.parseBoolean(bool.toString().trim());//WARING FALSE VALUES!!!
         if (bool == null) {
             return null;
         }
@@ -175,11 +155,7 @@ public class TGS_CastUtils {
     }
 
     public static Integer toInteger(byte b) {
-        try {
-            return Integer.parseInt(Byte.toString(b));
-        } catch (Exception e) {
-            return null;
-        }
+        return TGS_UnSafe.compile(() -> Integer.parseInt(Byte.toString(b)), e -> null);
     }
 
     public static Integer[] toInteger(CharSequence[] from) {
