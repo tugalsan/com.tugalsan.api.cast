@@ -13,6 +13,6 @@ public class TS_CastUtils {
         if (precision == null || precision < 0) {
             return String.valueOf(value);
         }
-        return String.format("%." + precision + "f", value);//I KNOW!
+        return String.format("%." + precision + "f", value);//GWT DOES NOT LIKE U
     }
 }
