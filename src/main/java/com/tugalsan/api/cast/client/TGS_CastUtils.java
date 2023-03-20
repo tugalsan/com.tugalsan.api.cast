@@ -140,15 +140,14 @@ public class TGS_CastUtils {
     }
 
     public static Boolean toBoolean(CharSequence bool) {
-//      return Boolean.parseBoolean(bool.toString().trim());//WARING FALSE VALUES!!!
         if (bool == null) {
             return null;
         }
         var str = bool.toString();
-        if (str.equalsIgnoreCase("true")) {
+        if (str.equalsIgnoreCase("true")) {//TO TURKISH CHECK NOT NEEDED
             return true;
         }
-        if (str.equalsIgnoreCase("false")) {
+        if (str.equalsIgnoreCase("false")) {//TO TURKISH CHECK NOT NEEDED
             return false;
         }
         return null;
