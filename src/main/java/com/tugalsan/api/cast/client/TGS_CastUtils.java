@@ -61,14 +61,14 @@ public class TGS_CastUtils {
     }
 
     public static boolean isInteger(CharSequence text) {
-        return TGS_UnSafe.compile(() -> {
+        return TGS_UnSafe.call(() -> {
             Integer.parseInt(text.toString());
             return true;
         }, e -> false);
     }
 
     public static boolean isDouble(CharSequence text) {
-        return TGS_UnSafe.compile(() -> {
+        return TGS_UnSafe.call(() -> {
             Double.parseDouble(text.toString());
             return true;
         }, e -> false);
@@ -104,7 +104,7 @@ public class TGS_CastUtils {
     }
 
     public static Integer toInteger(CharSequence s) {
-        return TGS_UnSafe.compile(() -> Integer.parseInt(s.toString().trim()), e -> null);
+        return TGS_UnSafe.call(() -> Integer.parseInt(s.toString().trim()), e -> null);
     }
 
     public static Long toLong(CharSequence s, Long defValue) {
@@ -113,16 +113,16 @@ public class TGS_CastUtils {
     }
 
     public static Long toLong(CharSequence s) {
-        return TGS_UnSafe.compile(() -> Long.parseLong(s.toString().trim()), e -> null);
+        return TGS_UnSafe.call(() -> Long.parseLong(s.toString().trim()), e -> null);
     }
 
     public static Long toLong(Object o) {
-        return TGS_UnSafe.compile(() -> Long.parseLong(o.toString().trim()), e -> null);
+        return TGS_UnSafe.call(() -> Long.parseLong(o.toString().trim()), e -> null);
     }
 
     @Deprecated
     public static Float toFloat(CharSequence s) {//ERROR PRONE
-        return TGS_UnSafe.compile(() -> Float.parseFloat(s.toString().trim().replace(",", ".")), e -> null);
+        return TGS_UnSafe.call(() -> Float.parseFloat(s.toString().trim().replace(",", ".")), e -> null);
     }
 
     public static Double toDouble(CharSequence s, Double defValue) {
@@ -131,7 +131,7 @@ public class TGS_CastUtils {
     }
 
     public static Double toDouble(CharSequence s) {
-        return TGS_UnSafe.compile(() -> Double.parseDouble(s.toString().trim().replace(",", ".")), e -> null);
+        return TGS_UnSafe.call(() -> Double.parseDouble(s.toString().trim().replace(",", ".")), e -> null);
     }
 
     public static Boolean toBoolean(CharSequence bool, Boolean defValue) {
@@ -154,7 +154,7 @@ public class TGS_CastUtils {
     }
 
     public static Integer toInteger(byte b) {
-        return TGS_UnSafe.compile(() -> Integer.parseInt(Byte.toString(b)), e -> null);
+        return TGS_UnSafe.call(() -> Integer.parseInt(Byte.toString(b)), e -> null);
     }
 
     public static Integer[] toInteger(CharSequence[] from) {
