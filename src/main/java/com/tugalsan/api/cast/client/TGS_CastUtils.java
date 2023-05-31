@@ -2,7 +2,6 @@ package com.tugalsan.api.cast.client;
 
 import java.util.*;
 import java.util.stream.*;
-import com.tugalsan.api.tuple.client.*;
 import com.tugalsan.api.string.client.*;
 import com.tugalsan.api.unsafe.client.*;
 
@@ -19,15 +18,13 @@ public class TGS_CastUtils {
     }
 
     public static int toInt(byte[] byte_array_4) {
-        TGS_Tuple1<Integer> ret = new TGS_Tuple1(0);
-        IntStream.range(0, 4).parallel().forEach(i -> {
+        return IntStream.range(0, 4).map(i -> {
             var b = (int) byte_array_4[i];
             if (i < 3 && b < 0) {
                 b = 256 + b;
             }
-            ret.value0 += b << (i * 8);
-        });
-        return ret.value0;
+            return b << (i * 8);
+        }).sum();
     }
 
     public static Byte[] toByte(byte[] bs) {
