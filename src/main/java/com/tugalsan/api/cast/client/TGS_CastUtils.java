@@ -2,7 +2,7 @@ package com.tugalsan.api.cast.client;
 
 import java.util.*;
 import java.util.stream.*;
-import com.tugalsan.api.pack.client.*;
+import com.tugalsan.api.tuple.client.*;
 import com.tugalsan.api.string.client.*;
 import com.tugalsan.api.unsafe.client.*;
 
@@ -19,7 +19,7 @@ public class TGS_CastUtils {
     }
 
     public static int toInt(byte[] byte_array_4) {
-        TGS_Pack1<Integer> ret = new TGS_Pack1(0);
+        TGS_Tuple1<Integer> ret = new TGS_Tuple1(0);
         IntStream.range(0, 4).parallel().forEach(i -> {
             var b = (int) byte_array_4[i];
             if (i < 3 && b < 0) {
