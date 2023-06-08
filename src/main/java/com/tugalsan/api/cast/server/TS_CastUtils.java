@@ -20,7 +20,7 @@ public class TS_CastUtils {
         return String.format("%." + precision + "f", value);//GWT DOES NOT LIKE U
     }
 
-    public static Optional<Path> toPath(String path) {
-        return TGS_UnSafe.call(() -> Optional.of(Path.of(path)), e -> Optional.empty());
+    public static Optional<Path> toPath(CharSequence path) {
+        return TGS_UnSafe.call(() -> Optional.of(Path.of(path.toString())), e -> Optional.empty());
     }
 }
