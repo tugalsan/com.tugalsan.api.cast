@@ -1,5 +1,8 @@
 package com.tugalsan.api.cast.server;
 
+import com.tugalsan.api.unsafe.client.TGS_UnSafe;
+import java.nio.file.Path;
+
 public class TS_CastUtils {
 
     public static String toString(Float value, Integer precision) {
@@ -7,12 +10,16 @@ public class TS_CastUtils {
     }
 
     public static String toString(Double value, Integer precision) {
-        if (value == null) { 
+        if (value == null) {
             return "null";
         }
         if (precision == null || precision < 0) {
             return String.valueOf(value);
         }
         return String.format("%." + precision + "f", value);//GWT DOES NOT LIKE U
+    }
+
+    public static Path toPath(String path) {
+        return TGS_UnSafe.call(() -> Path.of(path), e -> null);
     }
 }
