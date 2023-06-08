@@ -2,6 +2,7 @@ package com.tugalsan.api.cast.server;
 
 import com.tugalsan.api.unsafe.client.TGS_UnSafe;
 import java.nio.file.Path;
+import java.util.Optional;
 
 public class TS_CastUtils {
 
@@ -19,7 +20,7 @@ public class TS_CastUtils {
         return String.format("%." + precision + "f", value);//GWT DOES NOT LIKE U
     }
 
-    public static Path toPath(String path) {
-        return TGS_UnSafe.call(() -> Path.of(path), e -> null);
+    public static Optional<Path> toPath(String path) {
+        return TGS_UnSafe.call(() -> Optional.of(Path.of(path)), e -> Optional.empty());
     }
 }
