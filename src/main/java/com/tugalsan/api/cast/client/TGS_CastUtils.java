@@ -10,8 +10,8 @@ public class TGS_CastUtils {
     public static byte[] toByte(int in_int) {
         var a = new byte[4];
         IntStream.range(0, 4).parallel().forEach(i -> {
-            int b_int = (in_int >> (i * 8)) & 255;
-            byte b = (byte) (b_int);
+            var b_int = (in_int >> (i * 8)) & 255;
+            var b = (byte) (b_int);
             a[i] = b;
         });
         return a;
