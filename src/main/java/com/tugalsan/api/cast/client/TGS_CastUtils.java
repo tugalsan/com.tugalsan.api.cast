@@ -3,7 +3,6 @@ package com.tugalsan.api.cast.client;
 import java.util.*;
 import java.util.stream.*;
 import com.tugalsan.api.string.client.*;
-import com.tugalsan.api.unsafe.client.*;
 
 public class TGS_CastUtils {
 
@@ -58,17 +57,21 @@ public class TGS_CastUtils {
     }
 
     public static boolean isInteger(CharSequence text) {
-        return TGS_UnSafe.call(() -> {
+        try {
             Integer.valueOf(text.toString());
             return true;
-        }, e -> false);
+        } catch (NumberFormatException | NullPointerException e) {
+            return false;
+        }
     }
 
     public static boolean isDouble(CharSequence text) {
-        return TGS_UnSafe.call(() -> {
+        try {
             Double.valueOf(text.toString());
             return true;
-        }, e -> false);
+        } catch (NumberFormatException | NullPointerException e) {
+            return false;
+        }
     }
 
     public static String toString(List<String> data, CharSequence delimiter) {
@@ -101,7 +104,11 @@ public class TGS_CastUtils {
     }
 
     public static Integer toInteger(CharSequence s) {
-        return TGS_UnSafe.call(() -> Integer.valueOf(s.toString().trim()), e -> null);
+        try {
+            return Integer.valueOf(s.toString().trim());
+        } catch (NumberFormatException | NullPointerException e) {
+            return null;
+        }
     }
 
     public static Long toLong(CharSequence s, Long defValue) {
@@ -110,16 +117,28 @@ public class TGS_CastUtils {
     }
 
     public static Long toLong(CharSequence s) {
-        return TGS_UnSafe.call(() -> Long.valueOf(s.toString().trim()), e -> null);
+        try {
+            return Long.valueOf(s.toString().trim());
+        } catch (NumberFormatException | NullPointerException e) {
+            return null;
+        }
     }
 
     public static Long toLong(Object o) {
-        return TGS_UnSafe.call(() -> Long.valueOf(o.toString().trim()), e -> null);
+        try {
+            return Long.valueOf(o.toString().trim());
+        } catch (NumberFormatException | NullPointerException e) {
+            return null;
+        }
     }
 
     @Deprecated
     public static Float toFloat(CharSequence s) {//ERROR PRONE
-        return TGS_UnSafe.call(() -> Float.valueOf(s.toString().trim().replace(",", ".")), e -> null);
+        try {
+            return Float.valueOf(s.toString().trim().replace(",", "."));
+        } catch (NumberFormatException | NullPointerException e) {
+            return null;
+        }
     }
 
     public static Double toDouble(CharSequence s, Double defValue) {
@@ -128,7 +147,11 @@ public class TGS_CastUtils {
     }
 
     public static Double toDouble(CharSequence s) {
-        return TGS_UnSafe.call(() -> Double.valueOf(s.toString().trim().replace(",", ".")), e -> null);
+        try {
+            return Double.valueOf(s.toString().trim().replace(",", "."));
+        } catch (NumberFormatException | NullPointerException e) {
+            return null;
+        }
     }
 
     public static Boolean toBoolean(CharSequence bool, Boolean defValue) {
@@ -151,7 +174,11 @@ public class TGS_CastUtils {
     }
 
     public static Integer toInteger(byte b) {
-        return TGS_UnSafe.call(() -> Integer.valueOf(Byte.toString(b)), e -> null);
+        try {
+            return Integer.valueOf(Byte.toString(b));
+        } catch (NumberFormatException | NullPointerException e) {
+            return null;
+        }
     }
 
     public static Integer[] toInteger(CharSequence[] from) {

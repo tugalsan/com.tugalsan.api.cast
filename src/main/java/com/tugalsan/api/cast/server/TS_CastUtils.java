@@ -1,8 +1,8 @@
 package com.tugalsan.api.cast.server;
 
-import com.tugalsan.api.unsafe.client.TGS_UnSafe;
+import com.tugalsan.api.union.client.TGS_Union;
+import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.Path;
-import java.util.Optional;
 
 public class TS_CastUtils {
 
@@ -20,7 +20,11 @@ public class TS_CastUtils {
         return String.format("%." + precision + "f", value);//GWT DOES NOT LIKE U
     }
 
-    public static Optional<Path> toPath(CharSequence path) {
-        return TGS_UnSafe.call(() -> Optional.of(Path.of(path.toString())), e -> Optional.empty());
+    public static TGS_Union<Path> toPath(CharSequence path) {
+        try {
+            return TGS_Union.of(Path.of(path.toString()));
+        } catch (FileSystemNotFoundException | SecurityException | IllegalArgumentException e) {
+            return TGS_Union.ofThrowable(e);
+        }
     }
 }
