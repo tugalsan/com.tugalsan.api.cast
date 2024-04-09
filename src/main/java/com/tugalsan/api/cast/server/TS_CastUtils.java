@@ -24,7 +24,7 @@ public class TS_CastUtils {
         try {
             return TGS_Union.of(Path.of(path.toString()));
         } catch (FileSystemNotFoundException | SecurityException | IllegalArgumentException e) {
-            return TGS_Union.ofThrowable(e);
+            return TGS_Union.ofExcuse(e);
         }
     }
 }
