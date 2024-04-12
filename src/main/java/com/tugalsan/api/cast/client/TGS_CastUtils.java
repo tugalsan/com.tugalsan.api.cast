@@ -3,6 +3,7 @@ package com.tugalsan.api.cast.client;
 import java.util.*;
 import java.util.stream.*;
 import com.tugalsan.api.string.client.*;
+import com.tugalsan.api.union.client.TGS_UnionExcuse;
 
 public class TGS_CastUtils {
 
@@ -33,6 +34,9 @@ public class TGS_CastUtils {
     }
 
     public static boolean isMail(CharSequence text) {
+        if (text == null) {
+            return false;
+        }
         var textStr = text.toString();
         var at = textStr.indexOf("@");
         var dt = textStr.lastIndexOf(".");
@@ -98,93 +102,70 @@ public class TGS_CastUtils {
         return s;
     }
 
-    public static Integer toInteger(CharSequence s, Integer defValue) {
-        var val = toInteger(s);
-        return val == null ? defValue : val;
-    }
-
-    public static Integer toInteger(CharSequence s) {
+    public static TGS_UnionExcuse<Integer> toInteger(CharSequence s) {
         try {
-            return Integer.valueOf(s.toString().trim());
+            return TGS_UnionExcuse.of(Integer.valueOf(s.toString().trim()));
         } catch (NumberFormatException | NullPointerException e) {
-            return null;
+            return TGS_UnionExcuse.ofExcuse(e);
         }
     }
 
-    public static Long toLong(CharSequence s, Long defValue) {
-        var val = toLong(s);
-        return val == null ? defValue : val;
-    }
-
-    public static Long toLong(CharSequence s) {
+    public static TGS_UnionExcuse<Long> toLong(CharSequence s) {
         try {
-            return Long.valueOf(s.toString().trim());
+            return TGS_UnionExcuse.of(Long.valueOf(s.toString().trim()));
         } catch (NumberFormatException | NullPointerException e) {
-            return null;
+            return TGS_UnionExcuse.ofExcuse(e);
         }
     }
 
-    public static Long toLong(Object o) {
+    public static TGS_UnionExcuse<Long> toLong(Object o) {
         try {
-            return Long.valueOf(o.toString().trim());
+            return TGS_UnionExcuse.of(Long.valueOf(o.toString().trim()));
         } catch (NumberFormatException | NullPointerException e) {
-            return null;
+            return TGS_UnionExcuse.ofExcuse(e);
         }
     }
 
     @Deprecated
-    public static Float toFloat(CharSequence s) {//ERROR PRONE
+    public static TGS_UnionExcuse<Float> toFloat(CharSequence s) {//ERROR PRONE
         try {
-            return Float.valueOf(s.toString().trim().replace(",", "."));
+            return TGS_UnionExcuse.of(Float.valueOf(s.toString().trim().replace(",", ".")));
         } catch (NumberFormatException | NullPointerException e) {
-            return null;
+            return TGS_UnionExcuse.ofExcuse(e);
         }
     }
 
-    public static Double toDouble(CharSequence s, Double defValue) {
-        var val = toDouble(s);
-        return val == null ? defValue : val;
-    }
-
-    public static Double toDouble(CharSequence s) {
+    public static TGS_UnionExcuse<Double> toDouble(CharSequence s) {
         try {
-            return Double.valueOf(s.toString().trim().replace(",", "."));
+            return TGS_UnionExcuse.of(Double.valueOf(s.toString().trim().replace(",", ".")));
         } catch (NumberFormatException | NullPointerException e) {
-            return null;
+            return TGS_UnionExcuse.ofExcuse(e);
         }
     }
 
-    public static Boolean toBoolean(CharSequence bool, Boolean defValue) {
-        var val = toBoolean(bool);
-        return val == null ? defValue : val;
-    }
-
-    public static Boolean toBoolean(CharSequence bool) {
-        if (bool == null) {
-            return null;
+    public static TGS_UnionExcuse<Boolean> toBoolean(CharSequence s) {
+        try {
+            return TGS_UnionExcuse.of(Boolean.valueOf(s.toString().trim()));
+        } catch (NumberFormatException | NullPointerException e) {
+            return TGS_UnionExcuse.ofExcuse(e);
         }
-        var str = bool.toString();
-        if (str.equalsIgnoreCase("true")) {//TO TURKISH CHECK NOT NEEDED
-            return true;
-        }
-        if (str.equalsIgnoreCase("false")) {//TO TURKISH CHECK NOT NEEDED
-            return false;
-        }
-        return null;
     }
 
     public static Integer toInteger(byte b) {
-        try {
-            return Integer.valueOf(Byte.toString(b));
-        } catch (NumberFormatException | NullPointerException e) {
-            return null;
-        }
+        return Integer.valueOf(Byte.toString(b));
     }
 
-    public static Integer[] toInteger(CharSequence[] from) {
-        var i = new Integer[from.length];
-        IntStream.range(0, from.length).parallel().forEach(j -> i[j] = TGS_CastUtils.toInteger(from[j].toString()));
-        return i;
+    public static TGS_UnionExcuse<Integer[]> toInteger(CharSequence[] from) {
+        var arr = new Integer[from.length];
+        TGS_UnionExcuse<Integer> cast;
+        for (var i = 0; i < from.length; i++) {
+            cast = TGS_CastUtils.toInteger(from[i].toString());
+            if (cast.isExcuse()) {
+                return cast.toExcuse();
+            }
+            arr[i] = cast.value();
+        }
+        return TGS_UnionExcuse.of(arr);
     }
 
     public static Integer[] toInteger(int[] in) {
