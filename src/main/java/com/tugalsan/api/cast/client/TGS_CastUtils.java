@@ -82,7 +82,7 @@ public class TGS_CastUtils {
         if (data == null) {
             return s;
         }
-        data.stream().forEachOrdered(d -> s.add(TGS_StringUtils.toString_tab(d)));
+        data.stream().forEachOrdered(d -> s.add(TGS_StringUtils.cmn().toString_tab(d)));
         return s;
     }
 
@@ -91,7 +91,7 @@ public class TGS_CastUtils {
         if (data == null) {
             return s;
         }
-        Arrays.stream(data).forEachOrdered(d -> s.add(TGS_StringUtils.toString_tab(d)));
+        Arrays.stream(data).forEachOrdered(d -> s.add(TGS_StringUtils.cmn().toString_tab(d)));
         return s;
     }
 
