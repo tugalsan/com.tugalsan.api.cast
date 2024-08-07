@@ -100,11 +100,21 @@ public class TGS_CastUtils {
         return val == null ? defValue : val;
     }
 
+    public static int toInteger(CharSequence s, int defValue) {
+        var val = toInteger(s);
+        return val == null ? defValue : val;
+    }
+
     public static Integer toInteger(CharSequence s) {
         return TGS_UnSafe.call(() -> Integer.valueOf(s.toString().trim()), e -> null);
     }
 
     public static Long toLong(CharSequence s, Long defValue) {
+        var val = toLong(s);
+        return val == null ? defValue : val;
+    }
+
+    public static long toLong(CharSequence s, long defValue) {
         var val = toLong(s);
         return val == null ? defValue : val;
     }
@@ -127,11 +137,21 @@ public class TGS_CastUtils {
         return val == null ? defValue : val;
     }
 
+    public static double toDouble(CharSequence s, double defValue) {
+        var val = toDouble(s);
+        return val == null ? defValue : val;
+    }
+
     public static Double toDouble(CharSequence s) {
         return TGS_UnSafe.call(() -> Double.valueOf(s.toString().trim().replace(",", ".")), e -> null);
     }
 
     public static Boolean toBoolean(CharSequence bool, Boolean defValue) {
+        var val = toBoolean(bool);
+        return val == null ? defValue : val;
+    }
+    
+    public static boolean toBoolean(CharSequence bool, boolean defValue) {
         var val = toBoolean(bool);
         return val == null ? defValue : val;
     }
