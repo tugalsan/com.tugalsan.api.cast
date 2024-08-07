@@ -100,7 +100,7 @@ public class TGS_CastUtils {
         return val == null ? defValue : val;
     }
 
-    public static int toInteger(CharSequence s, int defValue) {
+    public static int toInt(CharSequence s, int defValue) {
         var val = toInteger(s);
         return val == null ? defValue : val;
     }
