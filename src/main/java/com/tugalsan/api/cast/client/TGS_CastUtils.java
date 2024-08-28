@@ -64,6 +64,20 @@ public class TGS_CastUtils {
         }, e -> false);
     }
 
+    public static boolean isLong(CharSequence text) {
+        return TGS_UnSafe.call(() -> {
+            Long.valueOf(text.toString());
+            return true;
+        }, e -> false);
+    }
+
+    public static boolean isBoolean(CharSequence text) {
+        return TGS_UnSafe.call(() -> {
+            Boolean.valueOf(text.toString());
+            return true;
+        }, e -> false);
+    }
+
     public static boolean isDouble(CharSequence text) {
         return TGS_UnSafe.call(() -> {
             Double.valueOf(text.toString());
@@ -150,7 +164,7 @@ public class TGS_CastUtils {
         var val = toBoolean(bool);
         return val == null ? defValue : val;
     }
-    
+
     public static boolean toBoolean(CharSequence bool, boolean defValue) {
         var val = toBoolean(bool);
         return val == null ? defValue : val;
