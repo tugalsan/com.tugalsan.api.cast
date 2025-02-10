@@ -1,9 +1,10 @@
 package com.tugalsan.api.cast.client;
 
+import com.tugalsan.api.function.client.maythrow.checkedexceptions.TGS_FuncMTCEUtils;
 import java.util.*;
 import java.util.stream.*;
 import com.tugalsan.api.string.client.*;
-import com.tugalsan.api.unsafe.client.*;
+
 
 public class TGS_CastUtils {
 
@@ -58,28 +59,28 @@ public class TGS_CastUtils {
     }
 
     public static boolean isInteger(CharSequence text) {
-        return TGS_UnSafe.call(() -> {
+        return TGS_FuncMTCEUtils.call(() -> {
             Integer.valueOf(text.toString());
             return true;
         }, e -> false);
     }
 
     public static boolean isLong(CharSequence text) {
-        return TGS_UnSafe.call(() -> {
+        return TGS_FuncMTCEUtils.call(() -> {
             Long.valueOf(text.toString());
             return true;
         }, e -> false);
     }
 
     public static boolean isBoolean(CharSequence text) {
-        return TGS_UnSafe.call(() -> {
+        return TGS_FuncMTCEUtils.call(() -> {
             Boolean.valueOf(text.toString());
             return true;
         }, e -> false);
     }
 
     public static boolean isDouble(CharSequence text) {
-        return TGS_UnSafe.call(() -> {
+        return TGS_FuncMTCEUtils.call(() -> {
             Double.valueOf(text.toString());
             return true;
         }, e -> false);
@@ -120,7 +121,7 @@ public class TGS_CastUtils {
     }
 
     public static Integer toInteger(CharSequence s) {
-        return TGS_UnSafe.call(() -> Integer.valueOf(s.toString().trim()), e -> null);
+        return TGS_FuncMTCEUtils.call(() -> Integer.valueOf(s.toString().trim()), e -> null);
     }
 
     public static Long toLong(CharSequence s, Long defValue) {
@@ -134,16 +135,16 @@ public class TGS_CastUtils {
     }
 
     public static Long toLong(CharSequence s) {
-        return TGS_UnSafe.call(() -> Long.valueOf(s.toString().trim()), e -> null);
+        return TGS_FuncMTCEUtils.call(() -> Long.valueOf(s.toString().trim()), e -> null);
     }
 
     public static Long toLong(Object o) {
-        return TGS_UnSafe.call(() -> Long.valueOf(o.toString().trim()), e -> null);
+        return TGS_FuncMTCEUtils.call(() -> Long.valueOf(o.toString().trim()), e -> null);
     }
 
     @Deprecated
     public static Float toFloat(CharSequence s) {//ERROR PRONE
-        return TGS_UnSafe.call(() -> Float.valueOf(s.toString().trim().replace(",", ".")), e -> null);
+        return TGS_FuncMTCEUtils.call(() -> Float.valueOf(s.toString().trim().replace(",", ".")), e -> null);
     }
 
     public static Double toDouble(CharSequence s, Double defValue) {
@@ -157,7 +158,7 @@ public class TGS_CastUtils {
     }
 
     public static Double toDouble(CharSequence s) {
-        return TGS_UnSafe.call(() -> Double.valueOf(s.toString().trim().replace(",", ".")), e -> null);
+        return TGS_FuncMTCEUtils.call(() -> Double.valueOf(s.toString().trim().replace(",", ".")), e -> null);
     }
 
     public static Boolean toBoolean(CharSequence bool, Boolean defValue) {
@@ -185,7 +186,7 @@ public class TGS_CastUtils {
     }
 
     public static Integer toInteger(byte b) {
-        return TGS_UnSafe.call(() -> Integer.valueOf(Byte.toString(b)), e -> null);
+        return TGS_FuncMTCEUtils.call(() -> Integer.valueOf(Byte.toString(b)), e -> null);
     }
 
     public static Integer[] toInteger(CharSequence[] from) {
