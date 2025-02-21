@@ -5,8 +5,11 @@ import java.util.*;
 import java.util.stream.*;
 import com.tugalsan.api.string.client.*;
 
-
 public class TGS_CastUtils {
+
+    private TGS_CastUtils() {
+
+    }
 
     public static byte[] toByte(int in_int) {
         var a = new byte[4];
@@ -112,86 +115,104 @@ public class TGS_CastUtils {
 
     public static Integer toInteger(CharSequence s, Integer defValue) {
         var val = toInteger(s);
-        return val == null ? defValue : val;
+        return val.isEmpty() ? defValue : val.orElseThrow();
     }
 
     public static int toInt(CharSequence s, int defValue) {
         var val = toInteger(s);
-        return val == null ? defValue : val;
+        return val.isEmpty() ? defValue : val.orElseThrow();
     }
 
-    public static Integer toInteger(CharSequence s) {
-        return TGS_FuncMTCEUtils.call(() -> Integer.valueOf(s.toString().trim()), e -> null);
+    public static Optional<Integer> toInteger(CharSequence s) {
+        return TGS_FuncMTCEUtils.call(() -> {
+            var val = Integer.valueOf(s.toString().trim());
+            return Optional.of(val);
+        }, e -> Optional.empty());
     }
 
     public static Long toLong(CharSequence s, Long defValue) {
         var val = toLong(s);
-        return val == null ? defValue : val;
+        return val.isEmpty() ? defValue : val.orElseThrow();
     }
 
     public static long toLong(CharSequence s, long defValue) {
         var val = toLong(s);
-        return val == null ? defValue : val;
+        return val.isEmpty() ? defValue : val.orElseThrow();
     }
 
-    public static Long toLong(CharSequence s) {
-        return TGS_FuncMTCEUtils.call(() -> Long.valueOf(s.toString().trim()), e -> null);
+    public static Optional<Long> toLong(CharSequence s) {
+        return TGS_FuncMTCEUtils.call(() -> {
+            var val = Long.valueOf(s.toString().trim());
+            return Optional.of(val);
+        }, e -> Optional.empty());
     }
 
-    public static Long toLong(Object o) {
-        return TGS_FuncMTCEUtils.call(() -> Long.valueOf(o.toString().trim()), e -> null);
+    public static Optional<Long> toLong(Object o) {
+        return TGS_FuncMTCEUtils.call(() -> {
+            var val = Long.valueOf(o.toString().trim());
+            return Optional.of(val);
+        }, e -> Optional.empty());
     }
 
     @Deprecated
-    public static Float toFloat(CharSequence s) {//ERROR PRONE
-        return TGS_FuncMTCEUtils.call(() -> Float.valueOf(s.toString().trim().replace(",", ".")), e -> null);
+    public static Optional<Float> toFloat(CharSequence s) {//ERROR PRONE
+        return TGS_FuncMTCEUtils.call(() -> {
+            var val = Float.valueOf(s.toString().trim().replace(",", "."));
+            return Optional.of(val);
+        }, e -> Optional.empty());
     }
 
     public static Double toDouble(CharSequence s, Double defValue) {
         var val = toDouble(s);
-        return val == null ? defValue : val;
+        return val.isEmpty() ? defValue : val.orElseThrow();
     }
 
     public static double toDouble(CharSequence s, double defValue) {
         var val = toDouble(s);
-        return val == null ? defValue : val;
+        return val.isEmpty() ? defValue : val.orElseThrow();
     }
 
-    public static Double toDouble(CharSequence s) {
-        return TGS_FuncMTCEUtils.call(() -> Double.valueOf(s.toString().trim().replace(",", ".")), e -> null);
+    public static Optional<Double> toDouble(CharSequence s) {
+        return TGS_FuncMTCEUtils.call(() -> {
+            var val = Double.valueOf(s.toString().trim().replace(",", "."));
+            return Optional.of(val);
+        }, e -> Optional.empty());
     }
 
     public static Boolean toBoolean(CharSequence bool, Boolean defValue) {
         var val = toBoolean(bool);
-        return val == null ? defValue : val;
+        return val.isEmpty() ? defValue : val.orElseThrow();
     }
 
     public static boolean toBoolean(CharSequence bool, boolean defValue) {
         var val = toBoolean(bool);
-        return val == null ? defValue : val;
+        return val.isEmpty() ? defValue : val.orElseThrow();
     }
 
-    public static Boolean toBoolean(CharSequence bool) {
+    public static Optional<Boolean> toBoolean(CharSequence bool) {
         if (bool == null) {
-            return null;
+            return Optional.empty();
         }
         var str = bool.toString();
         if (str.equalsIgnoreCase("true")) {//TO TURKISH CHECK NOT NEEDED
-            return true;
+            return Optional.of(true);
         }
         if (str.equalsIgnoreCase("false")) {//TO TURKISH CHECK NOT NEEDED
-            return false;
+            return Optional.of(false);
         }
-        return null;
+        return Optional.empty();
     }
 
-    public static Integer toInteger(byte b) {
-        return TGS_FuncMTCEUtils.call(() -> Integer.valueOf(Byte.toString(b)), e -> null);
+    public static Optional<Integer> toInteger(byte b) {
+        return TGS_FuncMTCEUtils.call(() -> {
+            var val = Integer.valueOf(Byte.toString(b));
+            return Optional.of(val);
+        }, e -> Optional.empty());
     }
 
     public static Integer[] toInteger(CharSequence[] from) {
         var i = new Integer[from.length];
-        IntStream.range(0, from.length).parallel().forEach(j -> i[j] = TGS_CastUtils.toInteger(from[j].toString()));
+        IntStream.range(0, from.length).parallel().forEach(j -> i[j] = TGS_CastUtils.toInteger(from[j].toString()).orElse(null));
         return i;
     }
 
