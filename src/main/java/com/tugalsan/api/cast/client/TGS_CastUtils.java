@@ -91,7 +91,7 @@ public class TGS_CastUtils {
 
     public static String toString(List<String> data, CharSequence delimiter) {
         var sb = new StringJoiner(delimiter);
-        data.stream().forEachOrdered(s -> sb.add(s));
+        data.stream().forEachOrdered(sb::add);
         return sb.toString();
     }
 
@@ -242,7 +242,7 @@ public class TGS_CastUtils {
 
     public static String toString(CharSequence[] in) {
         var sb = new StringJoiner(", ", "[", "]");
-        Arrays.stream(in).forEachOrdered(s -> sb.add(s));
+        Arrays.stream(in).forEachOrdered(sb::add);
         return sb.toString();
     }
 

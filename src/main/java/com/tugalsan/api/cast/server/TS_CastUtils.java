@@ -6,6 +6,10 @@ import java.nio.file.Path;
 
 public class TS_CastUtils {
 
+    private TS_CastUtils(){
+        
+    }
+    
     public static String toString(Float value, Integer precision) {
         return toString(value.doubleValue(), precision);
     }
@@ -18,6 +22,8 @@ public class TS_CastUtils {
             return String.valueOf(value);
         }
         return String.format("%." + precision + "f", value);//GWT DOES NOT LIKE U
+//        var df = new DecimalFormat("0." + "0".repeat(precision));
+//        return df.format(value);
     }
 
     public static TGS_UnionExcuse<Path> toPath(CharSequence path) {
