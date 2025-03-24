@@ -1,6 +1,6 @@
 package com.tugalsan.api.cast.client;
 
-import com.tugalsan.api.function.client.maythrow.checkedexceptions.TGS_FuncMTCEUtils;
+import com.tugalsan.api.function.client.maythrowexceptions.checked.TGS_FuncMTCUtils;
 import java.util.*;
 import java.util.stream.*;
 import com.tugalsan.api.string.client.*;
@@ -62,28 +62,28 @@ public class TGS_CastUtils {
     }
 
     public static boolean isInteger(CharSequence text) {
-        return TGS_FuncMTCEUtils.call(() -> {
+        return TGS_FuncMTCUtils.call(() -> {
             Integer.valueOf(text.toString());
             return true;
         }, e -> false);
     }
 
     public static boolean isLong(CharSequence text) {
-        return TGS_FuncMTCEUtils.call(() -> {
+        return TGS_FuncMTCUtils.call(() -> {
             Long.valueOf(text.toString());
             return true;
         }, e -> false);
     }
 
     public static boolean isBoolean(CharSequence text) {
-        return TGS_FuncMTCEUtils.call(() -> {
+        return TGS_FuncMTCUtils.call(() -> {
             Boolean.valueOf(text.toString());
             return true;
         }, e -> false);
     }
 
     public static boolean isDouble(CharSequence text) {
-        return TGS_FuncMTCEUtils.call(() -> {
+        return TGS_FuncMTCUtils.call(() -> {
             Double.valueOf(text.toString());
             return true;
         }, e -> false);
@@ -124,7 +124,7 @@ public class TGS_CastUtils {
     }
 
     public static Optional<Integer> toInteger(CharSequence s) {
-        return TGS_FuncMTCEUtils.call(() -> {
+        return TGS_FuncMTCUtils.call(() -> {
             var val = Integer.valueOf(s.toString().trim());
             return Optional.of(val);
         }, e -> Optional.empty());
@@ -141,14 +141,14 @@ public class TGS_CastUtils {
     }
 
     public static Optional<Long> toLong(CharSequence s) {
-        return TGS_FuncMTCEUtils.call(() -> {
+        return TGS_FuncMTCUtils.call(() -> {
             var val = Long.valueOf(s.toString().trim());
             return Optional.of(val);
         }, e -> Optional.empty());
     }
 
     public static Optional<Long> toLong(Object o) {
-        return TGS_FuncMTCEUtils.call(() -> {
+        return TGS_FuncMTCUtils.call(() -> {
             var val = Long.valueOf(o.toString().trim());
             return Optional.of(val);
         }, e -> Optional.empty());
@@ -156,7 +156,7 @@ public class TGS_CastUtils {
 
     @Deprecated
     public static Optional<Float> toFloat(CharSequence s) {//ERROR PRONE
-        return TGS_FuncMTCEUtils.call(() -> {
+        return TGS_FuncMTCUtils.call(() -> {
             var val = Float.valueOf(s.toString().trim().replace(",", "."));
             return Optional.of(val);
         }, e -> Optional.empty());
@@ -173,7 +173,7 @@ public class TGS_CastUtils {
     }
 
     public static Optional<Double> toDouble(CharSequence s) {
-        return TGS_FuncMTCEUtils.call(() -> {
+        return TGS_FuncMTCUtils.call(() -> {
             var val = Double.valueOf(s.toString().trim().replace(",", "."));
             return Optional.of(val);
         }, e -> Optional.empty());
@@ -204,7 +204,7 @@ public class TGS_CastUtils {
     }
 
     public static Optional<Integer> toInteger(byte b) {
-        return TGS_FuncMTCEUtils.call(() -> {
+        return TGS_FuncMTCUtils.call(() -> {
             var val = Integer.valueOf(Byte.toString(b));
             return Optional.of(val);
         }, e -> Optional.empty());

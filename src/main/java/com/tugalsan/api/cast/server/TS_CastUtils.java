@@ -1,7 +1,7 @@
 package com.tugalsan.api.cast.server;
 
 import com.tugalsan.api.union.client.TGS_UnionExcuse;
-import com.tugalsan.api.function.client.maythrow.checkedexceptions.TGS_FuncMTCEUtils;
+import com.tugalsan.api.function.client.maythrowexceptions.checked.TGS_FuncMTCUtils;
 import java.nio.file.Path;
 
 public class TS_CastUtils {
@@ -27,6 +27,6 @@ public class TS_CastUtils {
     }
 
     public static TGS_UnionExcuse<Path> toPath(CharSequence path) {
-        return TGS_FuncMTCEUtils.call(() -> TGS_UnionExcuse.of(Path.of(path.toString())), e -> TGS_UnionExcuse.ofExcuse(e));
+        return TGS_FuncMTCUtils.call(() -> TGS_UnionExcuse.of(Path.of(path.toString())), e -> TGS_UnionExcuse.ofExcuse(e));
     }
 }
