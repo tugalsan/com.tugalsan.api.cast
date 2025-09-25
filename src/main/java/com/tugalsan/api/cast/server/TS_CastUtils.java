@@ -1,15 +1,15 @@
 package com.tugalsan.api.cast.server;
 
-import com.tugalsan.api.union.client.TGS_UnionExcuse;
-import com.tugalsan.api.function.client.maythrowexceptions.checked.TGS_FuncMTCUtils;
-import java.nio.file.Path;
+import module com.tugalsan.api.union;
+import module com.tugalsan.api.function;
+import java.nio.file.*;
 
 public class TS_CastUtils {
 
-    private TS_CastUtils(){
-        
+    private TS_CastUtils() {
+
     }
-    
+
     public static String toString(Float value, Integer precision) {
         return toString(value.doubleValue(), precision);
     }
